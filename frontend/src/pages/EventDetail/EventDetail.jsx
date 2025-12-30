@@ -41,14 +41,14 @@ const EventDetail = () => {
   const [imageIndex, setImageIndex] = React.useState(0);
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  // Fetch event details
+  
   useEffect(() => {
     if (id) {
       fetchEvent(id);
     }
   }, [id, fetchEvent]);
 
-  // Find similar events (same category, exclude current event)
+  
   const similarEvents = useMemo(() => {
     if (!currentEvent || !events || !Array.isArray(events)) return [];
     
@@ -219,7 +219,7 @@ const EventDetail = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
-        {/* Back Navigation */}
+        
         <div className="mb-6">
           <button
             onClick={() => navigate(-1)}
@@ -230,9 +230,9 @@ const EventDetail = () => {
           </button>
         </div>
 
-        {/* Main Event Card */}
+        
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
-          {/* Event Images */}
+          
           <div className="relative h-96 overflow-hidden">
             {eventImages.length > 0 && (
               <img
@@ -242,7 +242,7 @@ const EventDetail = () => {
               />
             )}
             
-            {/* Image Navigation */}
+            
             {eventImages.length > 1 && (
               <>
                 <button
@@ -271,14 +271,14 @@ const EventDetail = () => {
               </>
             )}
 
-            {/* Status Badge */}
+            
             <div className="absolute top-4 left-4">
               <span className={`px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(getEventStatus)}`}>
                 {getStatusText(getEventStatus)}
               </span>
             </div>
 
-            {/* Category Badge */}
+           
             <div className="absolute top-4 right-4">
               <span className="px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-semibold text-gray-800 flex items-center gap-2">
                 <FaTag />
@@ -286,7 +286,7 @@ const EventDetail = () => {
               </span>
             </div>
 
-            {/* Save Button */}
+            
             <button
               onClick={handleSaveEvent}
               className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm p-3 rounded-full hover:bg-white transition-colors shadow-lg"
@@ -299,10 +299,10 @@ const EventDetail = () => {
             </button>
           </div>
 
-          {/* Event Content */}
+          
           <div className="p-8">
             <div className="flex flex-col lg:flex-row gap-8">
-              {/* Main Content */}
+              
               <div className="flex-1">
                 <div className="flex justify-between items-start mb-6">
                   <div>
@@ -332,7 +332,7 @@ const EventDetail = () => {
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
+                  
                   <div className="flex gap-2">
                     <button
                       onClick={handleShareEvent}
@@ -364,7 +364,7 @@ const EventDetail = () => {
                   </div>
                 </div>
 
-                {/* Event Description */}
+                
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold text-gray-800 mb-4">Description</h3>
                   <div className="prose max-w-none">
@@ -374,7 +374,7 @@ const EventDetail = () => {
                   </div>
                 </div>
 
-                {/* Event Details Grid */}
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   <div className="bg-gray-50 p-6 rounded-xl">
                     <h4 className="font-semibold text-gray-800 mb-4">Event Details</h4>
@@ -441,7 +441,7 @@ const EventDetail = () => {
                   </div>
                 </div>
 
-                {/* Attend Button */}
+                
                 {getEventStatus === 'upcoming' || getEventStatus === 'today' ? (
                   <button
                     onClick={handleAttendEvent}
@@ -462,7 +462,7 @@ const EventDetail = () => {
           </div>
         </div>
 
-        {/* Similar Events Section */}
+        
         {similarEvents.length > 0 && (
           <div className="mb-8">
             <div className="flex justify-between items-center mb-6">
