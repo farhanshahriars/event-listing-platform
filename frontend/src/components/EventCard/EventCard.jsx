@@ -50,12 +50,12 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
     return colors[category] || colors.Other;
   };
 
-  // List view layout
+  
   if (viewMode === 'list') {
     return (
       <Link to={`/events/${event._id}`}>
         <div className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 mb-4 flex flex-col md:flex-row">
-          {/* Image for list view */}
+          
           <div className="md:w-48 h-48 md:h-auto overflow-hidden rounded-t-xl md:rounded-l-xl md:rounded-tr-none flex-shrink-0">
             <img 
               src={event.image} 
@@ -64,7 +64,7 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
             />
           </div>
           
-          {/* Content for list view */}
+          
           <div className="p-6 flex-grow flex flex-col">
             <div className="flex justify-between items-start mb-3">
               <div>
@@ -98,7 +98,7 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
               {event.description}
             </p>
             
-            {/* Event info in horizontal layout */}
+            
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-auto pt-4 border-t border-gray-100">
               <div className="flex items-center text-gray-700">
                 <FaCalendar className="mr-2 text-blue-500 flex-shrink-0" />
@@ -139,11 +139,11 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
     );
   }
 
-  // Grid view (default)
+  
   return (
     <Link to={`/events/${event._id}`}>
       <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
-        {/* Event Image */}
+        
         <div className="relative h-48 overflow-hidden">
           <img 
             src={event.image} 
@@ -172,7 +172,7 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
           )}
         </div>
 
-        {/* Event Details */}
+        
         <div className="p-5 flex-grow flex flex-col">
           <h3 className="text-xl font-bold text-gray-800 mb-2 line-clamp-2">
             {event.title}
@@ -181,7 +181,7 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
             {event.description}
           </p>
 
-          {/* Event Info */}
+          
           <div className="space-y-3 mt-auto">
             <div className="flex items-center text-gray-700">
               <FaCalendar className="mr-2 text-blue-500 flex-shrink-0" />
@@ -205,7 +205,7 @@ const EventCard = ({ event, viewMode = 'grid' }) => {
             )}
           </div>
 
-          {/* Host Info */}
+          
           <div className="mt-4 pt-4 border-t border-gray-100">
             <div className="flex items-center">
               <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-2">
