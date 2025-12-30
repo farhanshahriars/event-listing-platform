@@ -21,7 +21,7 @@ const Register = () => {
   const { register, loading, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
-  // Redirect if already authenticated
+  
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/dashboard', { replace: true });
@@ -35,7 +35,7 @@ const Register = () => {
       [name]: value
     }));
 
-    // Check password strength
+    
     if (name === 'password') {
       calculatePasswordStrength(value);
     }
@@ -134,7 +134,7 @@ const Register = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -148,12 +148,12 @@ const Register = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Registration Form */}
+          
           <div className="lg:w-2/3">
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Name Field */}
+                  
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                       Full Name
@@ -176,7 +176,7 @@ const Register = () => {
                     </div>
                   </div>
 
-                  {/* Email Field */}
+                  
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address
@@ -200,7 +200,7 @@ const Register = () => {
                   </div>
                 </div>
 
-                {/* Password Field */}
+                
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                     Password
@@ -233,7 +233,7 @@ const Register = () => {
                     </button>
                   </div>
                   
-                  {/* Password Strength Indicator */}
+                  
                   {formData.password && (
                     <div className="mt-3">
                       <div className="flex justify-between text-sm mb-1">
@@ -268,7 +268,7 @@ const Register = () => {
                   )}
                 </div>
 
-                {/* Confirm Password Field */}
+                
                 <div>
                   <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
                     Confirm Password
@@ -301,7 +301,7 @@ const Register = () => {
                     </button>
                   </div>
                   
-                  {/* Password Match Indicator */}
+                  
                   {formData.confirmPassword && (
                     <div className="mt-2">
                       <span className={`text-sm ${formData.password === formData.confirmPassword ? 'text-green-600' : 'text-red-600'}`}>
@@ -313,7 +313,7 @@ const Register = () => {
                   )}
                 </div>
 
-                {/* Terms and Conditions */}
+                
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -339,7 +339,7 @@ const Register = () => {
                   </div>
                 </div>
 
-                {/* Submit Button */}
+                
                 <button
                   type="submit"
                   disabled={loading}
@@ -356,7 +356,7 @@ const Register = () => {
                 </button>
               </form>
 
-              {/* Login Link */}
+              
               <div className="mt-8 text-center">
                 <p className="text-gray-600">
                   Already have an account?{' '}
@@ -371,7 +371,7 @@ const Register = () => {
             </div>
           </div>
 
-          {/* Benefits Sidebar */}
+          
           <div className="lg:w-1/3">
             <div className="bg-gradient-to-b from-purple-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white h-full">
               <h2 className="text-2xl font-bold mb-6">Why Join EventHub?</h2>
@@ -418,7 +418,7 @@ const Register = () => {
                 </div>
               </div>
 
-              {/* Stats */}
+              
               <div className="mt-8 pt-8 border-t border-white/20">
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
