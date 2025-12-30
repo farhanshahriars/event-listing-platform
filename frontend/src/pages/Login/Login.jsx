@@ -16,7 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Redirect if already authenticated
+  
   useEffect(() => {
     if (isAuthenticated) {
       const from = location.state?.from?.pathname || '/dashboard';
@@ -35,7 +35,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Basic validation
+    
     if (!formData.email || !formData.password) {
       toast.error('Please fill in all fields');
       return;
@@ -46,14 +46,14 @@ const Login = () => {
     if (result.success) {
       toast.success('Login successful!');
       
-      // Remember me functionality
+      
       if (rememberMe) {
         localStorage.setItem('rememberMe', 'true');
       } else {
         localStorage.removeItem('rememberMe');
       }
       
-      // Redirect to previous page or dashboard
+      
       const from = location.state?.from?.pathname || '/dashboard';
       navigate(from, { replace: true });
     } else {
@@ -63,10 +63,10 @@ const Login = () => {
 
   const handleSocialLogin = (provider) => {
     toast.loading(`${provider} login coming soon!`);
-    // Implement social login here
+    
   };
 
-  // Demo account login
+  
   const handleDemoLogin = () => {
     setFormData({
       email: 'demo@example.com',
@@ -78,7 +78,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Header */}
+        
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -91,10 +91,10 @@ const Login = () => {
           <p className="text-gray-600">Sign in to your account to continue</p>
         </div>
 
-        {/* Login Card */}
+        
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Field */}
+            
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
@@ -117,7 +117,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Password Field */}
+            
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
@@ -159,7 +159,7 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Remember Me */}
+            
             <div className="flex items-center">
               <input
                 id="remember-me"
@@ -174,7 +174,7 @@ const Login = () => {
               </label>
             </div>
 
-            {/* Submit Button */}
+            
             <button
               type="submit"
               disabled={loading}
@@ -190,7 +190,7 @@ const Login = () => {
               )}
             </button>
 
-            {/* Demo Account Button */}
+            
             <button
               type="button"
               onClick={handleDemoLogin}
@@ -200,7 +200,7 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Divider */}
+          
           <div className="my-6 relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
@@ -210,7 +210,7 @@ const Login = () => {
             </div>
           </div>
 
-          {/* Social Login Buttons */}
+          
           <div className="grid grid-cols-2 gap-3">
             <button
               onClick={() => handleSocialLogin('Google')}
@@ -228,7 +228,7 @@ const Login = () => {
             </button>
           </div>
 
-          {/* Register Link */}
+          
           <div className="mt-8 text-center">
             <p className="text-gray-600">
               Don't have an account?{' '}
@@ -242,7 +242,7 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Features */}
+        
         <div className="mt-8 grid grid-cols-3 gap-4 text-center">
           <div className="p-4 bg-white/50 backdrop-blur-sm rounded-xl">
             <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
