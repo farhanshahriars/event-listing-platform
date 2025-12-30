@@ -17,7 +17,7 @@ const Footer = () => {
     <footer className="bg-gray-900 text-white pt-10 pb-6">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
+          
           <div>
             <h3 className="text-2xl font-bold mb-4 flex items-center">
               <FaMapMarkerAlt className="mr-2 text-blue-400" />
@@ -42,7 +42,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          
           <div>
             <h4 className="text-xl font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -74,7 +74,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Categories */}
+          
           <div>
             <h4 className="text-xl font-semibold mb-4">Categories</h4>
             <ul className="space-y-2">
@@ -106,7 +106,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          
           <div>
             <h4 className="text-xl font-semibold mb-4">Contact Us</h4>
             <div className="space-y-3">
@@ -140,7 +140,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
+        
         <div className="border-t border-gray-800 mt-8 pt-6 text-center">
           <p className="text-gray-400">
             &copy; {currentYear} EventHub - Event Listing Platform. All rights reserved.
