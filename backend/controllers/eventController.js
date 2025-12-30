@@ -2,7 +2,7 @@ const Event = require('../models/Event');
 const User = require('../models/User');
 const { validationResult } = require('express-validator');
 
-// Create Event
+
 exports.createEvent = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -47,7 +47,7 @@ exports.createEvent = async (req, res) => {
   }
 };
 
-// Get All Events
+
 exports.getAllEvents = async (req, res) => {
   try {
     const { category, location, search } = req.query;
@@ -80,7 +80,7 @@ exports.getAllEvents = async (req, res) => {
   }
 };
 
-// Get Single Event
+
 exports.getEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
@@ -98,7 +98,7 @@ exports.getEvent = async (req, res) => {
   }
 };
 
-// Update Event
+
 exports.updateEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -107,7 +107,7 @@ exports.updateEvent = async (req, res) => {
       return res.status(404).json({ error: 'Event not found' });
     }
     
-    // Check if user is the creator
+    
     if (event.createdBy.toString() !== req.userId) {
       return res.status(403).json({ error: 'Not authorized' });
     }
@@ -128,7 +128,7 @@ exports.updateEvent = async (req, res) => {
   }
 };
 
-// Delete Event
+
 exports.deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -137,14 +137,14 @@ exports.deleteEvent = async (req, res) => {
       return res.status(404).json({ error: 'Event not found' });
     }
     
-    // Check if user is the creator
+    
     if (event.createdBy.toString() !== req.userId) {
       return res.status(403).json({ error: 'Not authorized' });
     }
     
     await event.deleteOne();
     
-    // Remove event from users' saved events
+    
     await User.updateMany(
       { savedEvents: req.params.id },
       { $pull: { savedEvents: req.params.id } }
@@ -157,7 +157,7 @@ exports.deleteEvent = async (req, res) => {
   }
 };
 
-// Save/Unsave Event
+
 exports.toggleSaveEvent = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
@@ -170,7 +170,7 @@ exports.toggleSaveEvent = async (req, res) => {
     const isSaved = user.savedEvents.includes(eventId);
     
     if (isSaved) {
-      // Remove from saved
+      
       user.savedEvents = user.savedEvents.filter(id => id.toString() !== eventId);
       await user.save();
       
@@ -179,7 +179,7 @@ exports.toggleSaveEvent = async (req, res) => {
         saved: false
       });
     } else {
-      // Add to saved
+      
       user.savedEvents.push(eventId);
       await user.save();
       
@@ -194,7 +194,7 @@ exports.toggleSaveEvent = async (req, res) => {
   }
 };
 
-// Get User's Saved Events
+
 exports.getSavedEvents = async (req, res) => {
   try {
     const user = await User.findById(req.userId).populate({
@@ -216,7 +216,7 @@ exports.getSavedEvents = async (req, res) => {
   }
 };
 
-// Get User's Created Events
+
 exports.getUserEvents = async (req, res) => {
   try {
     const events = await Event.find({ createdBy: req.userId })
