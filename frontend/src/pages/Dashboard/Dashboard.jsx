@@ -49,10 +49,10 @@ const Dashboard = () => {
     price: '0'
   });
 
-  // Initialize profile form when user data is available
+  
   useEffect(() => {
     if (user) {
-      // Use setTimeout to make the state update asynchronous
+      
       const timeoutId = setTimeout(() => {
         setProfileForm({
           name: user.name || '',
@@ -65,21 +65,21 @@ const Dashboard = () => {
     }
   }, [user]);
 
-  // Redirect if not authenticated
+  
   useEffect(() => {
     if (!authLoading && !user) {
       navigate('/login');
     }
   }, [user, authLoading, navigate]);
 
-  // Fetch events
+  
   useEffect(() => {
     if (user && activeTab === 'events') {
       fetchUserEvents();
     }
   }, [user, activeTab, fetchUserEvents]);
 
-  // Handlers
+  
   const handleProfileChange = (e) => {
     const { name, value } = e.target;
     setProfileForm(prev => ({ ...prev, [name]: value }));
