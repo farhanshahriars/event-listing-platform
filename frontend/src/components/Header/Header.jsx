@@ -1,201 +1,90 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { 
-  FaCalendarAlt, 
-  FaUser, 
-  FaSignOutAlt, 
-  FaSearch, 
-  FaBars, 
-  FaTimes 
-} from 'react-icons/fa';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Calendar, User, LogIn } from 'lucide-react';
 import useAuthStore from '../../store/authStore';
 
 const Header = () => {
-  const { isAuthenticated, user, logout } = useAuthStore();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/events?search=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery('');
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
+  const { user, logout, isAuthenticated } = useAuthStore();
 
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <FaCalendarAlt className="text-3xl" />
+    <header className="bg-gradient-to-r from-blue-600 to-purple-700 shadow-lg">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          
+          
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="bg-white p-2 rounded-lg group-hover:rotate-12 transition-transform">
+              <Calendar size={28} className="text-blue-600" />
+            </div>
             <div>
-              <h1 className="text-2xl font-bold">EventHub</h1>
-              <p className="text-xs text-blue-200">Find Local Events</p>
+              <h1 className="text-2xl md:text-3xl font-bold text-white">
+                Event<span className="text-yellow-300">Hub</span>
+              </h1>
+              <p className="text-blue-100 text-sm">Find local events</p>
             </div>
           </Link>
 
-          {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-xl mx-6">
-            <form onSubmit={handleSearch} className="w-full">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search events by name, category, or location..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-blue-600"
-                >
-                  <FaSearch />
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <Link to="/" className="hover:text-blue-200 transition-colors font-medium">
+          
+          <nav className="flex flex-wrap justify-center gap-4 md:gap-8">
+            <Link 
+              to="/" 
+              className="text-white hover:text-yellow-300 font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-white/10"
+            >
               Home
             </Link>
-            <Link to="/events" className="hover:text-blue-200 transition-colors font-medium">
+            <Link 
+              to="/events" 
+              className="text-white hover:text-yellow-300 font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-white/10"
+            >
               Browse Events
             </Link>
-            
+            {isAuthenticated && (
+              <Link 
+                to="/dashboard" 
+                className="text-white hover:text-yellow-300 font-semibold transition-colors px-3 py-2 rounded-lg hover:bg-white/10"
+              >
+                Dashboard
+              </Link>
+            )}
+          </nav>
+
+          
+          <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
-                <Link 
-                  to="/dashboard" 
-                  className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium flex items-center space-x-2"
-                >
-                  <FaUser />
-                  <span>Dashboard</span>
-                </Link>
+                <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full">
+                  <User size={20} className="text-white" />
+                  <span className="text-white font-medium">
+                    {user?.name || 'User'}
+                  </span>
+                </div>
                 <button
-                  onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+                  onClick={logout}
+                  className="bg-white text-blue-700 hover:bg-gray-100 font-semibold py-2 px-6 rounded-full transition-all hover:scale-105 shadow"
                 >
-                  <FaSignOutAlt />
-                  <span>Logout</span>
+                  Logout
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="hover:text-blue-200 transition-colors font-medium">
-                  Login
+                <Link 
+                  to="/login"
+                  className="flex items-center space-x-2 text-white hover:text-yellow-300 font-semibold transition-colors"
+                >
+                  <LogIn size={20} />
+                  <span>Login</span>
                 </Link>
                 <Link 
-                  to="/register" 
-                  className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium"
+                  to="/register"
+                  className="bg-yellow-400 text-gray-900 hover:bg-yellow-300 font-bold py-3 px-6 rounded-full transition-all hover:scale-105 shadow-lg"
                 >
-                  Register
+                  Sign Up Free
                 </Link>
               </>
             )}
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-2xl"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-3">
-            {/* Mobile Search */}
-            <form onSubmit={handleSearch} className="mb-4">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search events..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-2 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
-                >
-                  <FaSearch />
-                </button>
-              </div>
-            </form>
-
-            {/* Mobile Navigation Links */}
-            <div className="flex flex-col space-y-3">
-              <Link 
-                to="/" 
-                className="hover:text-blue-200 transition-colors font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/events" 
-                className="hover:text-blue-200 transition-colors font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Browse Events
-              </Link>
-              
-              {isAuthenticated ? (
-                <>
-                  <div className="flex items-center space-x-2 py-2">
-                    <FaUser />
-                    <span className="font-medium">{user?.name}</span>
-                  </div>
-                  <Link 
-                    to="/dashboard" 
-                    className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-center transition-colors"
-                  >
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link 
-                    to="/login" 
-                    className="hover:text-blue-200 transition-colors font-medium py-2 text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link 
-                    to="/register" 
-                    className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition-colors font-medium text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Register
-                  </Link>
-                </>
-              )}
-            </div>
           </div>
-        )}
+
+        </div>
       </div>
     </header>
   );
